@@ -7,27 +7,60 @@ styleUrls:['home.component.css']
 })
 export class HomeComponent implements OnInit {
     bodyText: string;
+    company: any;
+    vehicleName:any;
+    ModelNumber: any;
+    driverName: any;
+    vehicleType: any;
 
     constructor(private modalService: ModalService) { }
 
     ngOnInit() {
-        this.bodyText = 'This text can be updated in modal 1';
+    this.row = [ { "id": "CJDarcl", "name": "test", "price": "test", "quantity": "3", "modelno": "DSNG BUlK", "editmode": true } ]
 
-      this.row[0].id = 'CJDarcl';
-      this.row[0].name = 'test';
-      this.row[0].quantity = 3;
-      this.row[0].price="test"
-      this.row[0].modelno = 'DSNG BUlK';
-  
-      this.row[0].editmode = false;
     }
 
     openModal(id: string) {
         this.modalService.open(id);
+        var obj = {
+            id: '',
+            name: '',
+            price: 'null',
+            quantity: 'driverName',
+            modelno: '',
+            editmode: false,
+          };
+      
+          this.row.push(obj);
     }
 
     closeModal(id: string) {
-        this.modalService.close(id);
+        
+
+        if (this.row[this.row.length-1].id===''||
+        this.row[this.row.length-1].name===''||
+        this.row[this.row.length-1].price===''||
+        this.row[this.row.length-1].quantity===''||
+        this.row[this.row.length-1].modelno===''||this.row[this.row.length-1].id===null||
+        this.row[this.row.length-1].name===null||
+        this.row[this.row.length-1].price===null||
+        this.row[this.row.length-1].quantity===null||
+        this.row[this.row.length-1].modelno===null){
+          alert("Enter All Fields")
+        }else{
+    
+          if (this.row[this.row.length-1].editmode === true) {
+            this.row[this.row.length-1].editmode = false;
+            this.modalService.close(id);
+          } else {
+            this.row[this.row.length-1].editmode = false;
+            this.modalService.close(id);
+          }
+
+
+        
+        }
+
     }
 
     total = 0;
@@ -38,7 +71,7 @@ export class HomeComponent implements OnInit {
         id: '',
         name: 'test',
         price: '',
-        quantity: null,
+        quantity: '',
         modelno: '',
         editmode: true,
       },

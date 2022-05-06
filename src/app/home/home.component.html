@@ -1,13 +1,7 @@
 
     <p>{{bodyText}}</p>
+    <h1>{{row | json}}</h1>
     <button (click)="openModal('custom-modal-1')">Open Modal 1</button>
-
-
-
-<jw-modal id="custom-modal-2">
-    <h1 style="height:1000px">A Tall Custom Modal!</h1>
-    <button (click)="closeModal('custom-modal-2');">Close</button>
-</jw-modal>
 <html>
   <meta
     http-equiv="Content-Security-Policy"
@@ -110,52 +104,41 @@
       </tr>
     </table>
 
-
+  
 
     <jw-modal id="custom-modal-1">
     <h1>A Custom Modal!</h1>
     <p>Home page text: <input type="text" [(ngModel)]="bodyText" /></p>
 
+<!--
 
-    <table class="style" (onCellEditEnter)="editing($event)">
-    <tr>
-      <th style="max-width=60px">Company ok</th>
-      <th>Vehicle Name</th>
-      <th>Model Number</th>
-      <th>Driver Name</th>
-      <th>Vehicle Type</th>
-      <th></th>
-    </tr>
-    <tr *ngFor="let item of row; let i = index; ">
-
-        
-      <td>
-        <input
+  <label>Company </label>
+  <input
           type="text"
           *ngIf="row[row.length-1].editmode === true"
           [(ngModel)]="row[row.length-1].id"
           />
 
         <label > {{ row[row.length-1].id }} </label>
-      </td>
 
-      <td>
-        <input
-          type="text"
-          *ngIf="row[row.length-1].editmode === true"
-          
-          [(ngModel)]="row[row.length-1].name"
-        />
+      <label>Vehicle Name</label>
 
-        <label
-          type="text"
-          
-          [(ngModel)]="row[row.length-1].name"
-        >
-          {{ row[row.length-1].name }}</label
-        >
-      </td>
-      <td>
+      <input
+      type="text"
+      *ngIf="row[row.length-1].editmode === true"
+      
+      [(ngModel)]="row[row.length-1].name"
+    />
+
+    <label
+      type="text"
+      
+      [(ngModel)]="row[row.length-1].name"
+    >
+      {{ row[row.length-1].name }}</label
+    >
+
+      <label>Model Number</label>
 
       <select (change)="populateCity($event.target.value)"
       *ngIf="row[row.length-1].editmode === true"
@@ -167,21 +150,21 @@
           
     
           <label >{{row[row.length-1].quantity}}</label>
-      </td>
-      <td>
-        <input
-          type="text"
-          *ngIf="row[row.length-1].editmode === true"
-          
-          [(ngModel)]="row[row.length-1].price"
-        />
+      <label>Driver Name</label>
 
-        <label
-          type="text">
-          {{ row[row.length-1].price }}</label
-        >
-      </td>
-      <td>
+      <input
+      type="text"
+      *ngIf="row[row.length-1].editmode === true"
+      
+      [(ngModel)]="row[row.length-1].price"
+    />
+
+    <label
+      type="text">
+      {{ row[row.length-1].price }}</label
+    >
+      <label>Vehicle Type</label>
+
       <select
       *ngIf="item.editmode === true"
       [(ngModel)]="row[row.length-1].modelno">
@@ -194,17 +177,39 @@
           type="text"
           placeholder="Enter Vehicle Name"
           >
+          row[i].price
           {{ row[row.length-1].modelno }}</label
         >
-      </td>
-      <td>
-        <button (click)="deleteRow(i)"><i class="fa fa-trash"></i></button>
-        <button (click)="editRow(i, item)">Edit/Save</button>
-      </td>
-    </tr>
-  </table>
 
-
+        this.row[this.row.length-1].id===''||
+        this.row[this.row.length-1].name===''||
+        this.row[this.row.length-1].price===''||
+        this.row[this.row.length-1].quantity===''||
+        this.row[this.row.length-1].modelno===''||this.row[this.row.length-1].id===null||
+        this.row[this.row.length-1].name===null||
+        this.row[this.row.length-1].price===null||
+        this.row[this.row.length-1].quantity===null||
+        this.row[this.row.length-1].modelno===null){
+   -->
+   <label> Company </label>
+   <input type="text" [(ngModel)]="row[row.length-1].id">
+   <label for="">Vehicle Name</label>
+   <input type="text" [(ngModel)]="row[row.length-1].name">
+   <label for="">Model Number</label> 
+   <select (change)="populateCity($event.target.value)"
+   [(ngModel)]="row[row.length-1].quantity" >
+   <option value="">Select Model Number </option>
+   <option *ngFor="let s of State; let i = index" [value]="State[i].id" >
+    <span>{{s.name}}</span> </option>
+ </select> <br>
+ <label > Driver Name </label>
+ <input type="text" [(ngModel)]="row[row.length-1].price">
+ <label for=""> Vehicle Type </label>
+ <select
+ [(ngModel)]="row[row.length-1].modelno">
+ <option value="">Select Vehicle Type</option>
+ <option *ngFor="let c of dropdownCity" [value]="c.name">{{c.name}}</option>
+</select>
 
     <button (click)="closeModal('custom-modal-1');">Close</button>
 </jw-modal>
